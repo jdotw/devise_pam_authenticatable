@@ -41,6 +41,12 @@ In your Devise model, ensure the following is present:
 
     end
 
+Testing
+-------
+
+If the RAILS_ENV (environment) is set to 'test' then
+devise_pam_authenticatable will authenticate a user
+logging in as **testadmin** with password **test**
 
 References
 ----------

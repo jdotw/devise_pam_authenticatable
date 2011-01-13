@@ -26,9 +26,12 @@ module Devise
        def authenticate_with_pam(attributes={})
          return nil unless attributes[:username].present?
 
-         resource = new
-         resource[:username] = attributes[:username]
-         resource[:password] = attributes[:password]
+         resource = scoped.where(:username => attributes[:username]).first
+         if resource.blank?
+           resource = new
+           resource[:username] = attributes[:username]
+           resource[:password] = attributes[:password]
+         end
 
          if resource.try(:valid_pam_authentication?, attributes[:password])
            resource.save if resource.new_record?

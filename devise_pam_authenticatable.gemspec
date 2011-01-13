@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
+    "devise_pam_authenticatable.gemspec",
     "lib/devise_pam_authenticatable.rb",
     "lib/devise_pam_authenticatable/model.rb",
     "lib/devise_pam_authenticatable/pam_adapter.rb",
@@ -38,11 +39,14 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<devise>, ["> 1.1.0"])
+      s.add_runtime_dependency(%q<rpam>, [">= 0"])
     else
       s.add_dependency(%q<devise>, ["> 1.1.0"])
+      s.add_dependency(%q<rpam>, [">= 0"])
     end
   else
     s.add_dependency(%q<devise>, ["> 1.1.0"])
+    s.add_dependency(%q<rpam>, [">= 0"])
   end
 end
 

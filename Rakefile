@@ -32,6 +32,7 @@ begin
     gemspec.homepage = "http://github.com/jwilson511/devise_pam_authenticatable"
     gemspec.authors = ["James Wilson"]
     gemspec.add_runtime_dependency "devise", "> 1.1.0"
+    gemspec.add_runtime_dependency "rpam"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

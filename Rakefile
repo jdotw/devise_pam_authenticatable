@@ -31,7 +31,7 @@ begin
     gemspec.email = "jwilson@lithiumcorp.com"
     gemspec.homepage = "http://github.com/jwilson511/devise_pam_authenticatable"
     gemspec.authors = ["James Wilson"]
-    gemspec.add_runtime_dependency "devise", "> 1.1.0"
+    gemspec.add_runtime_dependency "devise", ">= 4.0.0"
     gemspec.add_runtime_dependency "rpam2"
   end
   Jeweler::GemcutterTasks.new

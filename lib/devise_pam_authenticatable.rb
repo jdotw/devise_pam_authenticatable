@@ -1,4 +1,5 @@
 require 'devise'
+require 'rpam2'
 
 require 'devise_pam_authenticatable/model'
 require 'devise_pam_authenticatable/strategy'

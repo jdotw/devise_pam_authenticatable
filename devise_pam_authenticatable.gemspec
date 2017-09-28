@@ -5,15 +5,15 @@
 # stub: devise_pam_authenticatable 1.0.3 ruby lib
 
 Gem::Specification.new do |s|
-  s.name = "devise_pam_authenticatable"
+  s.name = "devise_pam_authenticatable".freeze
   s.version = "1.0.3"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.require_paths = ["lib"]
-  s.authors = ["James Wilson"]
-  s.date = "2017-09-27"
-  s.description = "For authenticating against PAM (Pluggable Authentication Modules)"
-  s.email = "jwilson@lithiumcorp.com"
+  s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
+  s.require_paths = ["lib".freeze]
+  s.authors = ["James Wilson".freeze]
+  s.date = "2017-09-28"
+  s.description = "For authenticating against PAM (Pluggable Authentication Modules)".freeze
+  s.email = "jwilson@lithiumcorp.com".freeze
   s.extra_rdoc_files = [
     "README.md"
   ]
@@ -28,23 +28,24 @@ Gem::Specification.new do |s|
     "lib/devise_pam_authenticatable/model.rb",
     "lib/devise_pam_authenticatable/strategy.rb"
   ]
-  s.homepage = "http://github.com/jwilson511/devise_pam_authenticatable"
-  s.rubygems_version = "2.5.1"
-  s.summary = "Devise PAM authentication module using rpam2"
+  s.homepage = "http://github.com/jwilson511/devise_pam_authenticatable".freeze
+  s.licenses = ["MIT".freeze]
+  s.rubygems_version = "2.6.13".freeze
+  s.summary = "Devise PAM authentication module using rpam2".freeze
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<devise>, [">= 4.0.0"])
-      s.add_runtime_dependency(%q<rpam2>, [">= 0"])
+      s.add_runtime_dependency(%q<devise>.freeze, [">= 4.0.0"])
+      s.add_runtime_dependency(%q<rpam2>.freeze, [">= 0"])
     else
-      s.add_dependency(%q<devise>, [">= 4.0.0"])
-      s.add_dependency(%q<rpam2>, [">= 0"])
+      s.add_dependency(%q<devise>.freeze, [">= 4.0.0"])
+      s.add_dependency(%q<rpam2>.freeze, [">= 0"])
     end
   else
-    s.add_dependency(%q<devise>, [">= 4.0.0"])
-    s.add_dependency(%q<rpam2>, [">= 0"])
+    s.add_dependency(%q<devise>.freeze, [">= 4.0.0"])
+    s.add_dependency(%q<rpam2>.freeze, [">= 0"])
   end
 end
 

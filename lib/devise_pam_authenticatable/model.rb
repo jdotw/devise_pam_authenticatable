@@ -20,36 +20,46 @@ module Devise
         self.password = nil
       end
 
-      def servicename
-        self.class.servicename
-      end
-
-      def extract_name(attributes)
-        return attributes[:username] if attributes[:username].present?
-        return nil unless attributes[:email].present?
-        ret = attributes[:email].index("@#{self.class.emailextractsuffix}")
-        attributes[:email].slice(0, ret-1) if ret else nil
-      end
-
       # Checks if a resource is valid upon authentication.
-      def valid_pam_authentication?(password)
-        Rpam2.authpam(servicename, self.username, password)
+      def valid_pam_authentication?(username, password)
+        Rpam2.authpam(::Devise::servicename, username, password)
       end
 
       module ClassMethods
         Devise::Models.config(self, :servicename, :emailextractsuffix)
+        def extract_name(email)
+          email = email+"\n"
+          pos = email.index("@#{::Devise::emailextractsuffix}\n")
+          ret = email.slice(0, pos) if pos else nil
+          ret
+        end
+        def has_name(attributes)
+          return true if attributes[:username].present? && !::Devise::emailextractsuffix
+          return true if attributes[:email].present? && ::Devise::emailextractsuffix
+          false
+        end
         def authenticate_with_pam(attributes={})
-          username = extract_name attributes
-          return nil unless username
+          return nil unless has_name(attributes)
 
-          resource = scoped.where(:username => username).first
-          if resource.blank?
-            resource = new
-            resource[:username] = username
-            resource[:password] = attributes[:password]
+          if attributes[:username].present? || !::Devise::emailextractsuffix
+            resource = where(:username => attributes[:username]).first
+            if resource.blank?
+              resource = new
+              resource[:username] = attributes[:username]
+              resource.password = attributes[:password]
+            end
+            username = attributes[:username]
+          else
+            resource = where(:email => attributes[:email]).first
+            if resource.blank?
+              resource = new
+              resource[:email] = attributes[:email]
+              resource.password = attributes[:password]
+            end
+            username = extract_name(attributes[:email])
           end
 
-          if resource.try(:valid_pam_authentication?, attributes[:password])
+          if resource.try(:valid_pam_authentication?, username, attributes[:password])
             resource.save if resource.new_record?
             return resource
           else

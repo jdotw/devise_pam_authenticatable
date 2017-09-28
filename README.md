@@ -1,7 +1,7 @@
 Devise - PAM Authentication
 ===========================
 
-devise_pam_authenticatable is a Devise (http://github.com/plataformatec/devise) 
+devise\_pam\_authenticatable is a Devise (http://github.com/plataformatec/devise) 
 extension for authenticating using PAM (Pluggable Authentication Modulues) 
 via the rpam gem. 
 
@@ -17,7 +17,7 @@ Installation
 
 In the Gemfile for your application:
 
-    gem "devise_pam_authenticatable"
+    gem "devise\_pam\_authenticatable"
 
 Or, to use the latest from github:
 
@@ -41,12 +41,6 @@ In your Devise model, ensure the following is present:
 
     end
 
-Testing
--------
-
-If the RAILS_ENV (environment) is set to 'test' then
-devise_pam_authenticatable will authenticate a user
-logging in as **testadmin** with password **test**
 
 References
 ----------

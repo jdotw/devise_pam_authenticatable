@@ -44,7 +44,7 @@ module Devise
 
       # Checks if a resource is valid upon authentication.
       def valid_pam_authentication?(username, password)
-        Rpam2.authpam(get_service, username, password)
+        Rpam2.auth(get_service, username, password)
       end
 
       module ClassMethods

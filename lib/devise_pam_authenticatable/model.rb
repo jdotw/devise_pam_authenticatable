@@ -39,7 +39,11 @@ module Devise
         return nil unless get_suffix
         email = email+"\n"
         pos = email.index("@#{get_suffix}\n")
-        return email.slice(0, pos) if pos else return nil
+        if pos
+          email.slice(0, pos)
+        else
+          nil
+        end
       end
 
       # Checks if a resource is valid upon authentication.

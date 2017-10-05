@@ -1,10 +1,20 @@
 require 'devise'
-
-$: << File.expand_path("..", __FILE__)
+require 'rpam2'
 
 require 'devise_pam_authenticatable/model'
 require 'devise_pam_authenticatable/strategy'
-require 'devise_pam_authenticatable/routes'
-require 'devise_pam_authenticatable/pam_adapter'
-
-Devise.add_module(:pam_authenticatable, :strategy => true, :model => "devise_pam_authenticatable/model", :route => true)
+module Devise
+  mattr_accessor :pam_default_service
+  @@pam_default_service = "rpam"
+  mattr_accessor :pam_default_suffix
+  @@pam_default_suffix = nil
+  mattr_accessor :emailfield
+  @@emailfield = "email"
+  mattr_accessor :usernamefield
+  @@usernamefield = "username"
+end
+Devise.add_module(:pam_authenticatable,
+                  :route => :session,
+                  :strategy   => true,
+                  :controller => :sessions,
+                  :model => "devise_pam_authenticatable/model")

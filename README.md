@@ -1,23 +1,23 @@
 Devise - PAM Authentication
 ===========================
 
-devise_pam_authenticatable is a Devise (http://github.com/plataformatec/devise) 
-extension for authenticating using PAM (Pluggable Authentication Modulues) 
-via the rpam gem. 
+devise\_pam\_authenticatable is a Devise (http://github.com/plataformatec/devise)
+extension for authenticating using PAM (Pluggable Authentication Modulues)
+via the rpam gem.
 
 This allows you to authenticate against the local hosts authentication
 system including local account usernames and passwords.
 
 There are obvious security risks with using PAM authentication via a
 web-based application. Make sure you at least use SSL to keep usernames and
-passwords encrypted via HTTPS. 
+passwords encrypted via HTTPS.
 
 Installation
 ------------
 
 In the Gemfile for your application:
 
-    gem "devise_pam_authenticatable"
+    gem "devise\_pam\_authenticatable"
 
 Or, to use the latest from github:
 
@@ -26,27 +26,29 @@ Or, to use the latest from github:
 Setup
 -----
 
-The devise_pam_authenticatable extension required the use of 'username' as
-the login credential (not email). Make sure your Devise model is using
-'username' and not 'email'. 
+The devise_pam_authenticatable extension can use a username or extract the name from a special email address (suffix can be choosen)
+username field and email field are configurable
 
 In your Devise model, ensure the following is present:
 
     class User < ActiveRecord::Base
 
-      devise :pam_authenticatable
+      devise :pam_authenticatable, pam_service: "system-auth", pam_suffix: "foo"
 
       # Setup accessible (or protected) attributes for your model
-      attr_accessible :username, :password
+      attr_accessible :password, :<username or email field>
 
     end
 
-Testing
--------
+pam_service: "system-auth" is optional. By default the pam service specified in config.pam_default_service is used.
+pam_suffix: "foo" is optional. By default the pam email extraction suffix specified in config.pam_default_suffix is used.
 
-If the RAILS_ENV (environment) is set to 'test' then
-devise_pam_authenticatable will authenticate a user
-logging in as **testadmin** with password **test**
+Options:
+  config.pam_default_service = "rpam"
+  config.pam_default_suffix = nil # extraction disabled by default
+  #config.pam_default_suffix = "pam" # username@pam = username
+  config.emailfield = "email" # set emailfield
+  config.usernamefield = "username" # set to nil to disable username (only email extraction)
 
 References
 ----------
